@@ -5,11 +5,20 @@ import org.junit.Test
 
 class AcceptanceTests {
 
-  var app = new Application()
+  var canvas: List[List[String]] = _
 
   @Test
+  def runAll(): Unit = {
+    canvasCanBeCreated()
+    canDrawHorizontalLines()
+    canDrawVerticalLines()
+    canDrawRectangles()
+    canBucketFill()
+  }
+
   def canvasCanBeCreated(): Unit = {
-    val output:String = app.newInput("C 20 4")
+    canvas = Parser.newInput("C 20 4", canvas)
+    val output:String = Canvas.renderCanvas(canvas)
     val expected:String =
       "----------------------\n" +
       "|                    |\n" +
@@ -17,13 +26,12 @@ class AcceptanceTests {
       "|                    |\n" +
       "|                    |\n" +
       "----------------------"
-
     assertEquals(output, expected)
   }
 
-  @Test
   def canDrawHorizontalLines(): Unit = {
-    val output:String = app.newInput("L 1 2 6 2")
+    canvas = Parser.newInput("L 1 2 6 2", canvas)
+    val output:String = Canvas.renderCanvas(canvas)
     val expected:String =
       "----------------------\n" +
       "|                    |\n" +
@@ -35,9 +43,9 @@ class AcceptanceTests {
     assertEquals(output, expected)
   }
 
-  @Test
   def canDrawVerticalLines(): Unit = {
-    val output:String = app.newInput("L 1 2 6 2")
+    canvas = Parser.newInput("L 6 2 6 4", canvas)
+    val output:String = Canvas.renderCanvas(canvas)
     val expected:String =
       "----------------------\n" +
       "|                    |\n" +
@@ -49,9 +57,9 @@ class AcceptanceTests {
     assertEquals(output, expected)
   }
 
-  @Test
   def canDrawRectangles(): Unit = {
-    val output:String = app.newInput("R 16 1 20 3")
+    canvas = Parser.newInput("R 16 1 20 3", canvas)
+    val output:String = Canvas.renderCanvas(canvas)
     val expected:String =
       "----------------------\n" +
       "|               xxxxx|\n" +
@@ -63,9 +71,9 @@ class AcceptanceTests {
     assertEquals(output, expected)
   }
 
-  @Test
   def canBucketFill(): Unit = {
-    val output:String = app.newInput("B 10 3 o")
+    canvas = Parser.newInput("B 10 3 o", canvas)
+    val output:String = Canvas.renderCanvas(canvas)
     val expected:String =
       "----------------------\n" +
       "|oooooooooooooooxxxxx|\n" +
@@ -76,8 +84,4 @@ class AcceptanceTests {
 
     assertEquals(output, expected)
   }
-
-
-
-
 }

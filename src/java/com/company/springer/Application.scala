@@ -1,13 +1,15 @@
 package com.company.springer
 
-class Application {
+object Application {
 
-  def newInput(inputString: String): String= {
-    val commands = inputString.split(" ")
-    val canvas:List[List[String]] = commands(0) match {
-      case "C" => Canvas.generate(Integer.valueOf(commands(1)), Integer.valueOf(commands(2)))
+  def main(args: Array[String]): Unit = {
+    var canvas: List[List[String]] = Canvas.generate(5, 5)
+    while(true) {
+      print("Enter command: ")
+      var input = io.StdIn.readLine()
+      canvas = Parser.newInput(input, canvas)
+      println(Canvas.renderCanvas(canvas))
     }
-
-    Canvas.renderCanvas(canvas)
   }
+
 }

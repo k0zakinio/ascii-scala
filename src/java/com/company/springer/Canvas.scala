@@ -1,11 +1,10 @@
 package com.company.springer
 
 object Canvas {
-
-  def generate(width:Int, height:Int): List[List[String]] = List.fill(height)(List.fill(width)(" "))
-
   private val VERTICAL_BORDER = "|"
   private val HORIZONTAL_BORDER = "-"
+
+  def generate(width:Int, height:Int): List[List[String]] = List.fill(height)(List.fill(width)(" "))
 
   def renderCanvas(canvas: List[List[String]]): String = borderTopBottom(canvas) + "\n" + rowStrings(canvas) + borderTopBottom(canvas)
 
